@@ -6,8 +6,9 @@ while true; do
     sleep 1
     NEW=`stat "$1"`
     if [ "$NEW" != "$LAST" ]; then
-        echo "${1} has been changed"
+        source_file="${1}"   
+        destination_dir="../${1}"    
+        cp "$source_file" "$destination_dir"
         LAST="$NEW"
     fi
 done
-
