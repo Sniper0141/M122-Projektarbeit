@@ -2,7 +2,7 @@
 
 declare -A FILE_MOD_TIMES
 
-getDirFromList() {
+getDirFromList(){
 
     # testet ob es das file gibt 
     if [ "$#" -ne 1 ]; then
@@ -15,19 +15,19 @@ getDirFromList() {
     done < "$1"
 }
 
-function readFilesFromDir(){
+readFilesFromDir(){
+    current_directory=$(pwd)
     cd "$1"
     LIST=`ls -p | grep -v /`
-    echo $LIST
-    echo $2        
-    startObserver $LIST $2
+    startObserver $LIST $current_directory $2
 }   
 
-function startObserver(){ 
+startObserver(){ 
     num_args=$#
-    for (( i=1; i<num_args; i++ )); do
+    for (( i=1; i<num_args-1; i++ )); do
         FILE="${!i}"
-        sh ../observer.sh "${FILE}" "${!num_args}" & 
+        PWD="$((num_args - 1))"
+        sh ${!PWD}/observer.sh "${FILE}" "${!num_args}" "${!PWD}" & 
     done 
 } 
 
