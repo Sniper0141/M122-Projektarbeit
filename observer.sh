@@ -1,6 +1,5 @@
 #!/bin/bash
 
-LAST=`stat "$1"`
 while true; do 
     LAST=`stat "$1"`
     sleep 1
