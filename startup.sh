@@ -30,18 +30,19 @@ readFilesFromDir(){
         list1_sorted=($(printf "%s\n" "${list1[@]}" | sort))
         list2_sorted=($(printf "%s\n" "${list2[@]}" | sort))
 
-        # Capture the difference between the lists in a variable
-        diff1=$(comm -23 <(printf "%s\n" "${list1_sorted[@]}") <(printf "%s\n" "${list2_sorted[@]}"))
-        diff2=$(comm -13 <(printf "%s\n" "${list1_sorted[@]}") <(printf "%s\n" "${list2_sorted[@]}"))
-
-        # Combine the differences
-        combined_diff=$(printf "%s\n%s\n" "$diff1" "$diff2" | sort | uniq)
-
-        if [ -n "$combined_diff" ]; then
-            newFile="$combined_diff"
-            startObserver $newFile $current_directory $2
-            LIST=$NEW_LIST
-        fi
+        l2=" ${list2[*]} "
+        for item in ${list1[@]}; do
+            if ! [[ $l2 =~ " $item " ]] ; then
+                startObserver $item
+            fi
+        done
+        
+        l1=" ${list1[*]} "
+        for item in ${list2[@]}; do
+            if ! [[ $l1 =~ " $item " ]] ; then
+                rm $item
+            fi
+        done
     done
 }   
 
@@ -60,5 +61,7 @@ startObserver(){
         sh ${!PWD}/observer.sh "${FILE}" "${!num_args}" "${!PWD}" & 
     done 
 } 
+
+
 
 getDirFromList "config"
