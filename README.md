@@ -1,9 +1,14 @@
 # M122-Projektarbeit
 
+## About this project
+
+This project listens to all folders registered in the `config` file 
+and copies their contents into the respective backup folders (live).
+
 ## How to set up your project
 
 1. Clone the repository with `git clone`
     - Do not clone it into any folders containing spaces in their names!
 2. Enter `chmod +x setup.sh` in the root folder of the repository.
     - The script will now automatically start every time you boot your device.
-3. Edit the `config` file to your liking.
+3. Edit the `config` file to your liking...?
