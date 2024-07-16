@@ -30,15 +30,15 @@ readFilesFromDir(){
         list1_sorted=($(printf "%s\n" "${list1[@]}" | sort))
         list2_sorted=($(printf "%s\n" "${list2[@]}" | sort))
 
-        l2=" ${list2[*]} "
-        for item in ${list1[@]}; do
+        l2=" ${list2_sorted[*]} "
+        for item in ${list1_sorted[@]}; do
             if ! [[ $l2 =~ " $item " ]] ; then
                 startObserver $item
             fi
         done
         
-        l1=" ${list1[*]} "
-        for item in ${list2[@]}; do
+        l1=" ${list1_sorted[*]} "
+        for item in ${list2_sorted[@]}; do
             if ! [[ $l1 =~ " $item " ]] ; then
                 rm $item
             fi
