@@ -24,9 +24,16 @@ readFilesFromDir(){
 
 startObserver(){ 
     num_args=$#
+    PWD="$((num_args - 1))"
+
+    # testet ob es den directory gibt wohin es die backups speichern sollte  
+    if [ ! -d "${!PWD}/${!num_args}" ]; then
+        mkdir -p "${!PWD}/${!num_args}"
+        echo "dir ${!PWD}/${!num_args} created"
+    fi
+
     for (( i=1; i<num_args-1; i++ )); do
         FILE="${!i}"
-        PWD="$((num_args - 1))"
         sh ${!PWD}/observer.sh "${FILE}" "${!num_args}" "${!PWD}" & 
     done 
 } 
