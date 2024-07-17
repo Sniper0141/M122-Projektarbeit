@@ -5,7 +5,6 @@
 This project works as follows: 
 - A shell script starts multiple subshells to listen to all folders registered in the `config` file.
 - These subshells copy the folder's contents into the respective backup folders *live*.
-- When new files are added into the folder, the program *automatically* detects them and treats them as normal changes in the backup. (The same goes for when they are deleted)
 
 ## How to set up your project
 
