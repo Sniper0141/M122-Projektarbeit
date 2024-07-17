@@ -21,28 +21,30 @@ readFilesFromDir(){
     LIST=`ls -p | grep -v /`
     startObserver $LIST $current_directory $2
 
-    while true; do 
-        list1=($LIST)
-        sleep 1
-        NEW_LIST=$(ls -p | grep -v /)
-        list2=($NEW_LIST)
+    # hier sollte es in jedem folder weiter schauen ob neue files auftauchen 
+    # und je nach dem eine neue subshell erstellen aber funktioniert nicht
+    # while true; do 
+    #     list1=($LIST)
+    #     sleep 1
+    #     NEW_LIST=$(ls -p | grep -v /)
+    #     list2=($NEW_LIST)
 
-        list1_sorted=($(printf "%s\n" "${list1[@]}" | sort))
-        list2_sorted=($(printf "%s\n" "${list2[@]}" | sort))
+    #     list1_sorted=($(printf "%s\n" "${list1[@]}" | sort))
+    #     list2_sorted=($(printf "%s\n" "${list2[@]}" | sort))
 
-        l2=" ${list2_sorted[*]} "
-        for item in ${list1_sorted[@]}; do
-            if ! [[ $l2 =~ " $item " ]] ; then
-                startObserver $item
-            fi
-        done
+    #     l2=" ${list2_sorted[*]} "
+    #     for item in ${list1_sorted[@]}; do
+    #         if ! [[ $l2 =~ " $item " ]] ; then
+    #             startObserver $item
+    #         fi
+    #     done
         
-        l1=" ${list1_sorted[*]} "
-        for item in ${list2_sorted[@]}; do
-            if ! [[ $l1 =~ " $item " ]] ; then
-                rm $item
-            fi
-        done
+    #     l1=" ${list1_sorted[*]} "
+    #     for item in ${list2_sorted[@]}; do
+    #         if ! [[ $l1 =~ " $item " ]] ; then
+    #             rm $item
+    #         fi
+    #     done
     done
 }   
 
