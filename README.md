@@ -3,7 +3,7 @@
 ## About this project
 
 This project works as follows: 
-- A shell script starts multiple subshells to listen to all folders registered in the `config` file.
+- A shell script starts multiple subshells to listen to all files inside the folders registered in the `config` file.
 - These subshells copy the folder's contents into the respective backup folders *live*.
 
 ## How to set up your project
